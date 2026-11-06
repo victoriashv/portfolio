@@ -393,6 +393,15 @@
     <div class="work-slider reveal">
     <div class="work-grid" id="workGrid">
 
+      <div class="work-card" data-id="5" data-name="Mi•Ma Ästhetik Redesign" data-type="Practice Project · Real Client" data-tags="UX / Landing Page / Visual Identity" data-solution="Redesigned a template-based booking website for a medical aesthetics practice. Restructured the page into a clear story (hero, patient concerns, services, trust, FAQ, contact) and built a new visual identity with a warm palette and editorial typography. Worked in a team of two, covering UX and UI together." data-thumb="images/mima-case.png" data-links='[{"label":"Figma","url":"https://www.figma.com/design/2BfxVFBhefzoEQsyPfsWU0"}]'>
+        <div class="work-thumb p1">
+          <img src="images/mima-case.png" alt="Mi•Ma Ästhetik Redesign" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <div class="work-thumb-fallback p1" style="display:none;width:100%;height:100%;position:absolute;inset:0"><span class="work-thumb-num">05</span></div>
+        </div>
+        <div class="work-info"><h3 class="work-name">Mi•Ma Ästhetik Redesign</h3><p class="work-type">Practice Project · Real Client</p><p class="work-tags">UX / Landing Page / Visual Identity</p></div>
+        <div class="work-detail"><div class="work-detail-inner"><p class="work-solution">Redesigned a template-based booking website for a medical aesthetics practice. Restructured the page into a clear story (hero, patient concerns, services, trust, FAQ, contact) and built a new visual identity with a warm palette and editorial typography. Worked in a team of two, covering UX and UI together.</p><div class="work-links"><a class="work-link" href="https://www.figma.com/design/2BfxVFBhefzoEQsyPfsWU0" target="_blank">Figma <svg class="icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div></div>
+      </div>
+
       <div class="work-card" data-id="1" data-name="Booking App Redesign" data-type="UX Research &amp; UI Improvements" data-tags="UX / Usability Testing / Figma" data-solution="Conducted usability testing and analyzed user reviews. Redesigned screens to streamline flows by ~40% and reduced user confusion by ~25%." data-thumb="https://www.figma.com/file/4cGV3ul3xxLi7Gl60l3DJo/thumbnail" data-links='[{"label":"Figma","url":"https://www.figma.com/design/4cGV3ul3xxLi7Gl60l3DJo/booking.com"}]'>
         <div class="work-thumb p1">
           <img src="https://www.figma.com/file/4cGV3ul3xxLi7Gl60l3DJo/thumbnail" alt="Booking App Redesign" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
@@ -594,6 +603,18 @@
       track.appendChild(dot);
     });
   });
+
+  // Автонумерація: перша картка в слайдері має найбільший номер, остання — 01.
+  // Нову роботу вставляйте на початок — вона сама отримає наступний номер.
+  (function () {
+    const cards = document.querySelectorAll('#workGrid .work-card');
+    cards.forEach((card, i) => {
+      const num = cards.length - i;
+      card.dataset.id = num;
+      const n = card.querySelector('.work-thumb-num');
+      if (n) n.textContent = String(num).padStart(2, '0');
+    });
+  })();
 
   // Slider "Selected Work" — працює з будь-якою кількістю карток
   (function () {
