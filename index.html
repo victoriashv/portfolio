@@ -104,9 +104,20 @@
 
     /* ═══ SELECTED WORK ═══ */
     #selected-work { padding: 96px clamp(24px,4vw,48px); }
-    .work-grid { display:grid; grid-template-columns:1fr; gap:32px 48px; max-width:1100px; margin:0 auto; }
-    @media (min-width:1024px) { .work-grid { grid-template-columns:1fr 1fr; } }
-    .work-card { position:relative; }
+    /* Слайдер: нативний scroll-snap (свайп на телефоні, колесо/трекпад на ПК) + стрілки */
+    .work-slider { margin:0 auto; }
+    .work-grid { display:flex; align-items:flex-start; gap:20px; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scroll-behavior:smooth; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; scrollbar-width:none; padding:8px 0 16px; }
+    .work-grid::-webkit-scrollbar { display:none; }
+    .work-card { position:relative; flex:0 0 82%; scroll-snap-align:start; min-width:0; }
+    @media (min-width:640px) { .work-card { flex-basis:calc(50% - 10px); } }
+    @media (min-width:1024px) { .work-grid { gap:48px; } .work-card { flex-basis:calc(50% - 24px); } }
+    .slider-controls { display:flex; align-items:center; gap:20px; margin-top:24px; }
+    .slider-btn { width:48px; height:48px; border-radius:50%; border:1px solid var(--border); background:#fff; color:var(--fg); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .2s ease, color .2s ease, opacity .2s ease; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+    .slider-btn:hover:not(:disabled) { background:var(--fg); color:#fff; }
+    .slider-btn:disabled { opacity:.3; cursor:default; }
+    .slider-counter { font-size:14px; color:var(--muted); min-width:56px; font-variant-numeric:tabular-nums; }
+    .slider-progress { flex:1; height:1px; background:var(--border); position:relative; overflow:hidden; }
+    .slider-progress-bar { position:absolute; left:0; top:0; height:100%; background:var(--fg); width:0; transition:width .3s ease, transform .3s ease; }
     .work-thumb { aspect-ratio:4/3; overflow:hidden; margin-bottom:24px; position:relative; cursor:pointer; -webkit-tap-highlight-color:transparent; }
     .work-thumb img { width:100%; height:100%; object-fit:cover; transition:transform .4s ease; display:block; }
     .work-thumb:hover img { transform:scale(1.05); }
@@ -379,9 +390,10 @@
     <div class="section-header reveal">
       <span class="num">01</span><div class="line"></div><h2>Selected Work</h2>
     </div>
-    <div class="work-grid">
+    <div class="work-slider reveal">
+    <div class="work-grid" id="workGrid">
 
-      <div class="work-card reveal" data-id="1" data-name="Booking App Redesign" data-type="UX Research &amp; UI Improvements" data-tags="UX / Usability Testing / Figma" data-solution="Conducted usability testing and analyzed user reviews. Redesigned screens to streamline flows by ~40% and reduced user confusion by ~25%." data-thumb="https://www.figma.com/file/4cGV3ul3xxLi7Gl60l3DJo/thumbnail" data-links='[{"label":"Figma","url":"https://www.figma.com/design/4cGV3ul3xxLi7Gl60l3DJo/booking.com"}]'>
+      <div class="work-card" data-id="1" data-name="Booking App Redesign" data-type="UX Research &amp; UI Improvements" data-tags="UX / Usability Testing / Figma" data-solution="Conducted usability testing and analyzed user reviews. Redesigned screens to streamline flows by ~40% and reduced user confusion by ~25%." data-thumb="https://www.figma.com/file/4cGV3ul3xxLi7Gl60l3DJo/thumbnail" data-links='[{"label":"Figma","url":"https://www.figma.com/design/4cGV3ul3xxLi7Gl60l3DJo/booking.com"}]'>
         <div class="work-thumb p1">
           <img src="https://www.figma.com/file/4cGV3ul3xxLi7Gl60l3DJo/thumbnail" alt="Booking App Redesign" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
           <div class="work-thumb-fallback p1" style="display:none;width:100%;height:100%;position:absolute;inset:0"><span class="work-thumb-num">01</span></div>
@@ -390,7 +402,7 @@
         <div class="work-detail"><div class="work-detail-inner"><p class="work-solution">Conducted usability testing and analyzed user reviews. Redesigned screens to streamline flows by ~40% and reduced user confusion by ~25%.</p><div class="work-links"><a class="work-link" href="https://www.figma.com/design/4cGV3ul3xxLi7Gl60l3DJo/booking.com" target="_blank">Figma <svg class="icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div></div>
       </div>
 
-      <div class="work-card reveal" data-id="2" data-name="Uber Web UX Improvement" data-type="Design System Based" data-tags="UX / Design System / Flow Optimization" data-solution="Designed new onboarding flow for seamless UX. Improved flow by ~30% and increased CTR by ~15% through consistent UI." data-thumb="https://www.figma.com/file/BOtXecK68hU36mFKjL088W/thumbnail" data-links='[{"label":"Figma","url":"https://www.figma.com/design/BOtXecK68hU36mFKjL088W"}]'>
+      <div class="work-card" data-id="2" data-name="Uber Web UX Improvement" data-type="Design System Based" data-tags="UX / Design System / Flow Optimization" data-solution="Designed new onboarding flow for seamless UX. Improved flow by ~30% and increased CTR by ~15% through consistent UI." data-thumb="https://www.figma.com/file/BOtXecK68hU36mFKjL088W/thumbnail" data-links='[{"label":"Figma","url":"https://www.figma.com/design/BOtXecK68hU36mFKjL088W"}]'>
         <div class="work-thumb p2">
           <img src="https://www.figma.com/file/BOtXecK68hU36mFKjL088W/thumbnail" alt="Uber Web UX Improvement" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
           <div class="work-thumb-fallback p2" style="display:none;width:100%;height:100%;position:absolute;inset:0"><span class="work-thumb-num">02</span></div>
@@ -399,7 +411,7 @@
         <div class="work-detail"><div class="work-detail-inner"><p class="work-solution">Designed new onboarding flow for seamless UX. Improved flow by ~30% and increased CTR by ~15% through consistent UI.</p><div class="work-links"><a class="work-link" href="https://www.figma.com/design/BOtXecK68hU36mFKjL088W" target="_blank">Figma <svg class="icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div></div>
       </div>
 
-      <div class="work-card reveal" data-id="3" data-name="MVP+ Psychotherapist Platform" data-type="End-to-End Product" data-tags="UX Research / Webflow / Full Product" data-solution="Defined target audience, created user flows with sitemap, developed wireframes and high-fidelity UI. Built website in Webflow." data-thumb="https://www.figma.com/file/Bx0wscgTtUHYIPB9j8WMLx/thumbnail" data-links='[{"label":"Figma","url":"https://www.figma.com/design/Bx0wscgTtUHYIPB9j8WMLx"},{"label":"Webflow","url":"https://webflow.com/design/victoria-shv-finaly-site"}]'>
+      <div class="work-card" data-id="3" data-name="MVP+ Psychotherapist Platform" data-type="End-to-End Product" data-tags="UX Research / Webflow / Full Product" data-solution="Defined target audience, created user flows with sitemap, developed wireframes and high-fidelity UI. Built website in Webflow." data-thumb="https://www.figma.com/file/Bx0wscgTtUHYIPB9j8WMLx/thumbnail" data-links='[{"label":"Figma","url":"https://www.figma.com/design/Bx0wscgTtUHYIPB9j8WMLx"},{"label":"Webflow","url":"https://webflow.com/design/victoria-shv-finaly-site"}]'>
         <div class="work-thumb p3">
           <img src="https://www.figma.com/file/Bx0wscgTtUHYIPB9j8WMLx/thumbnail" alt="MVP+ Psychotherapist Platform" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
           <div class="work-thumb-fallback p3" style="display:none;width:100%;height:100%;position:absolute;inset:0"><span class="work-thumb-num">03</span></div>
@@ -408,7 +420,7 @@
         <div class="work-detail"><div class="work-detail-inner"><p class="work-solution">Defined target audience, created user flows with sitemap, developed wireframes and high-fidelity UI. Built website in Webflow.</p><div class="work-links"><a class="work-link" href="https://www.figma.com/design/Bx0wscgTtUHYIPB9j8WMLx" target="_blank">Figma <svg class="icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a> <a class="work-link" href="https://webflow.com/design/victoria-shv-finaly-site" target="_blank">Webflow <svg class="icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div></div>
       </div>
 
-      <div class="work-card reveal" data-id="4" data-name="Fintime App" data-type="UI Kit &amp; Visual Concept" data-tags="UI / Design System / Components" data-solution="Developed moodboard, color system, and typography. Designed comprehensive UI components including buttons, inputs, and cards." data-thumb="https://www.figma.com/file/xijbhj1guZ3VSAnLElXFf2/thumbnail" data-links='[{"label":"Figma","url":"https://www.figma.com/design/xijbhj1guZ3VSAnLElXFf2"}]'>
+      <div class="work-card" data-id="4" data-name="Fintime App" data-type="UI Kit &amp; Visual Concept" data-tags="UI / Design System / Components" data-solution="Developed moodboard, color system, and typography. Designed comprehensive UI components including buttons, inputs, and cards." data-thumb="https://www.figma.com/file/xijbhj1guZ3VSAnLElXFf2/thumbnail" data-links='[{"label":"Figma","url":"https://www.figma.com/design/xijbhj1guZ3VSAnLElXFf2"}]'>
         <div class="work-thumb p4">
           <img src="https://www.figma.com/file/xijbhj1guZ3VSAnLElXFf2/thumbnail" alt="Fintime App" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
           <div class="work-thumb-fallback p4" style="display:none;width:100%;height:100%;position:absolute;inset:0"><span class="work-thumb-num">04</span></div>
@@ -417,6 +429,17 @@
         <div class="work-detail"><div class="work-detail-inner"><p class="work-solution">Developed moodboard, color system, and typography. Designed comprehensive UI components including buttons, inputs, and cards.</p><div class="work-links"><a class="work-link" href="https://www.figma.com/design/xijbhj1guZ3VSAnLElXFf2" target="_blank">Figma <svg class="icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div></div>
       </div>
 
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" id="workPrev" type="button" aria-label="Previous work">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      </button>
+      <button class="slider-btn" id="workNext" type="button" aria-label="Next work">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <span class="slider-counter" id="workCounter">01 / 01</span>
+      <div class="slider-progress"><div class="slider-progress-bar" id="workProgress"></div></div>
+    </div>
     </div>
   </div>
 </section>
@@ -572,6 +595,43 @@
     });
   });
 
+  // Slider "Selected Work" — працює з будь-якою кількістю карток
+  (function () {
+    const grid = document.getElementById('workGrid');
+    const prev = document.getElementById('workPrev');
+    const next = document.getElementById('workNext');
+    const counter = document.getElementById('workCounter');
+    const bar = document.getElementById('workProgress');
+    const pad = n => String(n).padStart(2, '0');
+
+    function step() {
+      const card = grid.querySelector('.work-card');
+      if (!card) return grid.clientWidth;
+      const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+    function update() {
+      const cards = grid.querySelectorAll('.work-card');
+      const total = cards.length;
+      const max = grid.scrollWidth - grid.clientWidth;
+      const idx = Math.min(total, Math.round(grid.scrollLeft / step()) + 1);
+      const visible = Math.max(1, Math.round((grid.clientWidth + 1) / step()));
+      counter.textContent = pad(Math.min(total, idx)) + ' / ' + pad(total);
+      prev.disabled = grid.scrollLeft <= 2;
+      next.disabled = max <= 2 || grid.scrollLeft >= max - 2;
+      const ratio = grid.scrollWidth ? grid.clientWidth / grid.scrollWidth : 1;
+      const progress = max > 0 ? grid.scrollLeft / max : 0;
+      bar.style.width = (ratio * 100) + '%';
+      bar.style.transform = 'translateX(' + (progress * (1 / ratio - 1) * 100) + '%)';
+    }
+    prev.addEventListener('click', () => grid.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => grid.scrollBy({ left:  step(), behavior: 'smooth' }));
+    grid.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+    update();
+  })();
+
   // Overlay
   const gradients = {
     1:'linear-gradient(135deg,hsl(240,15%,14%),hsl(270,20%,22%))',
@@ -599,7 +659,7 @@
       img.style.opacity = '1';
       img.src = card.dataset.thumb;
       fb.style.display = 'block';
-      fb.style.background = gradients[id];
+      fb.style.background = gradients[id] || gradients[((id - 1) % 4) + 1];
       document.getElementById('oTags').textContent     = card.dataset.tags;
       document.getElementById('oName').textContent     = card.dataset.name;
       document.getElementById('oType').textContent     = card.dataset.type;
