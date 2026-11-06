@@ -265,6 +265,10 @@
     .about-link:hover { transform:translateX(5px); }
     .about-link::after { content:''; position:absolute; bottom:0; left:0; width:0; height:1px; background:var(--fg); transition:width .3s ease; }
     .about-link:hover::after { width:100%; }
+
+    /* ═══ FOOTER ═══ */
+    .site-footer { padding:28px clamp(24px,4vw,48px) calc(28px + env(safe-area-inset-bottom)); text-align:center; border-top:1px solid var(--border); background:var(--bg); }
+    .site-footer p { font-family:var(--sans); font-size:12px; letter-spacing:1px; color:var(--muted); }
   </style>
 </head>
 <body>
@@ -530,7 +534,14 @@
   </div>
 </section>
 
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <p>© <span id="footerYear">2026</span> Victoria Shvets. All rights reserved.</p>
+</footer>
+
 <script>
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
   // Scroll reveal
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
